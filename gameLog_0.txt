@@ -1,0 +1,42 @@
+Ship color ID: 1, Ship color: RGBA(0.000, 0.000, 0.000, 0.000)
+
+Ship color ID: 1, Ship color: RGBA(1.000, 1.000, 1.000, 1.000)
+
+Ship color ID: 2, Ship color: RGBA(1.000, 1.000, 1.000, 1.000)
+
+Ship color ID: 1, Ship color: RGBA(1.000, 1.000, 1.000, 1.000)
+
+Ship color ID: 2, Ship color: RGBA(1.000, 1.000, 1.000, 1.000)
+
+Ship color ID: 2, Ship color: RGBA(1.000, 1.000, 1.000, 1.000)
+
+Ship color ID: 2, Ship color: RGBA(1.000, 1.000, 1.000, 1.000)
+
+Ship color ID: 1, Ship color: RGBA(1.000, 1.000, 1.000, 1.000)
+
+Ship color ID: 1, Ship color: RGBA(1.000, 1.000, 1.000, 1.000)
+
+Ship color ID: 1, Ship color: RGBA(1.000, 1.000, 1.000, 1.000)
+
+Ship color ID: 2, Ship color: RGBA(1.000, 1.000, 1.000, 1.000)
+
+Ship color ID: 2, Ship color: RGBA(1.000, 1.000, 1.000, 1.000)
+
+Ship color ID: 2, Ship color: RGBA(1.000, 1.000, 1.000, 0.973)
+
+Ship color ID: 2, Ship color: RGBA(1.000, 1.000, 1.000, 0.973)
+
+Ship color ID: 1, Ship color: RGBA(1.000, 1.000, 1.000, 0.973)
+
+THIS IS NULL!!! PlayerColors:False, m_SpriteRenderer:True newTeamIndex:1 oldTeamIndex:0
+THIS IS NULL!!! PlayerColors:False, m_SpriteRenderer:True newTeamIndex:2 oldTeamIndex:0
+Ship color ID: 1, Ship color: RGBA(1.000, 1.000, 1.000, 0.973)
+
+Ship color ID: 1, Ship color: RGBA(1.000, 1.000, 1.000, 0.973)
+
+Ship color ID: 1, Ship color: RGBA(1.000, 1.000, 1.000, 0.973)
+
+Ship color ID: 2, Ship color: RGBA(1.000, 1.000, 1.000, 0.973)
+
+Ship color ID: 2, Ship color: RGBA(1.000, 1.000, 1.000, 0.973)
+
