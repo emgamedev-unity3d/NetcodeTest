@@ -43,8 +43,10 @@ public class ShipBulletBehavior : NetworkBehaviour
         }
     }
 
-    public void SetTrailColor(Color color)
-    { 
+    [ClientRpc]
+    public void SetTrailColorClientRpc(Color color)
+    {
+        // need to make sure that we're updating the right player
         if (trailGameObject != null)
         {
             var main = trailGameObject.main;

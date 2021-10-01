@@ -152,7 +152,7 @@ MonoBehaviour:
   m_gameObjectHealthBar: {fileID: 8694345068963663855}
   m_MovementSpeed: 9
   m_BulletPrefab: {fileID: 7155832538927118532, guid: 5990ea76bc3bb4444b28e2178c7f7b73, type: 3}
-  m_SpriteRenderer: {fileID: 0}
+  m_SpriteRenderer: {fileID: 3648989112074456033}
 --- !u!61 &-1527946444148983179
 BoxCollider2D:
   m_ObjectHideFlags: 0

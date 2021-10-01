@@ -70,7 +70,7 @@ public class SpaceshipController : NetworkBehaviour
             else
             {
                 Debug.Log("something is null!");
-                GameLogFile.WriteToLog(OwnerClientId, $"THIS IS NULL!!! PlayerColors:{PlayerColors == null}, m_SpriteRenderer:{m_SpriteRenderer == null} newTeamIndex:{newTeamIndex} oldTeamIndex:{oldTeamIndex}");
+                GameLogFile.WriteToLog(OwnerClientId, $"THIS IS NULL! PlayerColors:{PlayerColors == null}, m_SpriteRenderer:{m_SpriteRenderer == null} newTeamIndex:{newTeamIndex} oldTeamIndex:{oldTeamIndex}");
             }
         }
         catch(NullReferenceException nEx)
@@ -129,14 +129,12 @@ public class SpaceshipController : NetworkBehaviour
         m_direction.Normalize();
 
         // client lets the server know that it has moved it's player
-        if (IsOwner)
-            MoveSpaceShipServerRpc(m_direction);
+        MoveSpaceShipServerRpc(m_direction);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // Send a request to the server to spawn a bullet
-            if(IsOwner)
-                ShootBulletServerRPC();
+            ShootBulletServerRPC();
         }
     }
 
@@ -168,7 +166,7 @@ public class SpaceshipController : NetworkBehaviour
         var shipBulletBehavior = newBullet.GetComponent<ShipBulletBehavior>();
         shipBulletBehavior.bulletOwner = gameObject;
 
-        shipBulletBehavior.SetTrailColor(PlayerColors[m_shipColorId.Value]);
+        shipBulletBehavior.SetTrailColorClientRpc(PlayerColors[m_shipColorId.Value]);
 
         newBulletNetworkObject.gameObject.GetComponent<ShipBulletBehavior>().PlayParticlesClientRpc();
     }
