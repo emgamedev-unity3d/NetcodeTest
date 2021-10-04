@@ -4953,6 +4953,7 @@ MonoBehaviour:
   bulletSpeed: 10
   rotateSpeed: 90
   bulletOwner: {fileID: 0}
+  m_spriteRenderer: {fileID: 5357397972880385029}
   trailGameObject: {fileID: 7631303287652413178}
 --- !u!61 &2722268936547424115
 BoxCollider2D:

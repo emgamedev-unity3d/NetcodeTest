@@ -10,6 +10,9 @@ public class ShipBulletBehavior : NetworkBehaviour
     public GameObject bulletOwner = null;
 
     [SerializeField]
+    private SpriteRenderer m_spriteRenderer;
+
+    [SerializeField]
     private ParticleSystem trailGameObject = null;
 
     private NetworkVariable<float> bulletLifetime = 

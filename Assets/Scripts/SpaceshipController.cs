@@ -27,14 +27,11 @@ public class SpaceshipController : NetworkBehaviour
 
     private void Start()
     {
-        m_SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Similar to Start(), but for the Networking session
     public override void OnNetworkSpawn()
     {
-        m_SpriteRenderer = GetComponent<SpriteRenderer>();
-
         // your additional code here...
         UpdateColorServerRpc();
 
