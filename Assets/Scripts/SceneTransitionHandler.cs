@@ -4,10 +4,13 @@ using Unity.Netcode;
 
 public class SceneTransitionHandler : NetworkBehaviour
 {
+    /// <summary>
+    /// Main singleton reference
+    /// </summary>
     static public SceneTransitionHandler sceneTransitionHandler { get; internal set; }
 
     [SerializeField]
-    public string DefaultMainMenu = "StartMenu";
+    public string DefaultMainMenu = "SampleScene";
 
     [HideInInspector]
     public delegate void ClientLoadedSceneDelegateHandler(ulong clientId);
