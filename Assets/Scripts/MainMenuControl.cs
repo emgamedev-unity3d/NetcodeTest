@@ -18,15 +18,15 @@ public class MainMenuControl : MonoBehaviour
         InitializeVisualTree(GetComponent<UIDocument>());
     }
 
-    private void InitializeVisualTree(UIDocument doc)
+    private void InitializeVisualTree(UIDocument uiDocument)
     {
-        if (doc == null)
+        if (uiDocument == null)
         {
             Debug.LogError("UIDocument component missing!");
             return;
         }
 
-        var root = doc.rootVisualElement;
+        var root = uiDocument.rootVisualElement;
 
         var hostButton = root.Q<Button>("HostButton");
         hostButton.clicked += HostButton_clicked;
@@ -54,10 +54,5 @@ public class MainMenuControl : MonoBehaviour
     {
         NetworkManager.Singleton.StartServer();
         SceneTransitionHandler.sceneTransitionHandler.SwitchScene(SceneToSwitchTo);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 }
