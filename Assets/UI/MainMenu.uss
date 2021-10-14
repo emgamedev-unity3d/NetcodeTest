@@ -1,0 +1,26 @@
+.row {
+    flex-direction: row;
+}
+
+.column {
+    flex-direction: column;
+    align-items: auto;
+}
+
+#Root {
+    align-content: center;
+    width: 100%;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+}
+
+#Buttons {
+    align-content: center;
+    width: 50%;
+}
+
+#WelcomeLabel {
+    color: rgba(255, 255, 255, 255);
+    font-size: 47px;
+}

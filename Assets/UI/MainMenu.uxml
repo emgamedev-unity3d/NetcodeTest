@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="MainMenu.uss" />
+    <ui:VisualElement name="Root">
+        <ui:Label text="Welcome to the demo!" display-tooltip-when-elided="true" name="WelcomeLabel" />
+        <ui:VisualElement name="Buttons" style="width: 35%;">
+            <ui:Button text="Start as Host" display-tooltip-when-elided="true" name="HostButton" />
+            <ui:VisualElement name="separator" style="height: 10px;" />
+            <ui:Button text="Start as Client" display-tooltip-when-elided="true" name="ClientButton" />
+            <ui:VisualElement name="separator" style="height: 10px;" />
+            <ui:Button text="Start as Server" display-tooltip-when-elided="true" name="ServerButton" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

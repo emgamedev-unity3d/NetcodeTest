@@ -10,7 +10,7 @@ public class SceneTransitionHandler : NetworkBehaviour
     static public SceneTransitionHandler sceneTransitionHandler { get; internal set; }
 
     [SerializeField]
-    public string DefaultMainMenu = "SampleScene";
+    public string DefaultMainMenu = "MainMenu";
 
     [HideInInspector]
     public delegate void ClientLoadedSceneDelegateHandler(ulong clientId);
