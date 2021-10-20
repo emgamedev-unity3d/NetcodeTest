@@ -42,3 +42,5 @@ Ship color ID: 2, Ship color: RGBA(1.000, 1.000, 1.000, 0.973)
 
 Ship color ID: 1, Ship color: RGBA(1.000, 1.000, 1.000, 0.973)
 
+Ship color ID: 2, Ship color: RGBA(1.000, 1.000, 1.000, 0.973)
+

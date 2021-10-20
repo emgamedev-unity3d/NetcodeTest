@@ -1,4 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="GameScreen.uss" />
-    <ui:VisualElement name="Root" />
+    <ui:VisualElement name="Root" style="align-items: center;">
+        <ui:Label text="Game Time:" display-tooltip-when-elided="true" name="GameTimerLabel" style="font-size: 41px; color: rgb(33, 255, 0);" />
+    </ui:VisualElement>
 </ui:UXML>

@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Root" style="width: 100%; height: 100px; align-items: center; justify-content: center; top: 247px;">
+        <ui:Label text="Game over!&#10;&#10;Yay!" display-tooltip-when-elided="true" name="EndingLabel" style="font-size: 85px; -unity-text-align: upper-center; color: rgb(173, 255, 3);" />
+    </ui:VisualElement>
+</ui:UXML>
