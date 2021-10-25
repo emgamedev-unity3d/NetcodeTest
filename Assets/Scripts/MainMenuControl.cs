@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 public class MainMenuControl : MonoBehaviour
 {
     [SerializeField]
-    private string m_NextSceneToSwitchTo = string.Empty;
+    private string m_NextSceneToSwitchTo = "SampleScene";
 
     // Start is called before the first frame update
     void Start()

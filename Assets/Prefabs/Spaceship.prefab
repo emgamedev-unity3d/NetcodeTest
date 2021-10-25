@@ -132,6 +132,7 @@ MonoBehaviour:
   ScaleThreshold: 0
   InLocalSpace: 0
   Interpolate: 1
+  CanCommitToTransform: 0
 --- !u!114 &4758689927801149504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,12 +145,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79333e4b33657ef4e944b1bc0358704b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerColors:
-  - {r: 1, g: 0.12683439, b: 0.76400924, a: 1}
-  - {r: 0.016746044, g: 1, b: 0, a: 1}
-  - {r: 0, g: 0.68804026, b: 1, a: 1}
-  - {r: 1, g: 0.34604102, b: 0.13626832, a: 1}
-  m_gameObjectHealthBar: {fileID: 8694345068963663855}
+  m_PlayerColors:
+  - {r: 0, g: 0.7155075, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0.06752491, a: 1}
+  - {r: 1, g: 0.42316157, b: 0.06079662, a: 1}
+  - {r: 0.6603774, g: 0.13359837, b: 0.5852742, a: 1}
+  - {r: 0.5151558, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0.9122714, b: 0.013626814, a: 1}
+  - {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
+  m_GameObjectHealthBar: {fileID: 8694345068963663855}
   m_MovementSpeed: 9
   m_BulletPrefab: {fileID: 7155832538927118532, guid: 5990ea76bc3bb4444b28e2178c7f7b73, type: 3}
   m_SpriteRenderer: {fileID: 3648989112074456033}
@@ -322,3 +326,4 @@ MonoBehaviour:
   ScaleThreshold: 0
   InLocalSpace: 0
   Interpolate: 1
+  CanCommitToTransform: 0

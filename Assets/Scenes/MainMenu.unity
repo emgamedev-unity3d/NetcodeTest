@@ -266,4 +266,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f0e6d06dec5844180c885d15cda14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToSwitchTo: SampleScene
+  m_NextSceneToSwitchTo: SampleScene

@@ -4938,6 +4938,7 @@ MonoBehaviour:
   ScaleThreshold: 0
   InLocalSpace: 0
   Interpolate: 1
+  CanCommitToTransform: 0
 --- !u!114 &2463211163896243419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4950,11 +4951,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440c4887d056a5944a49fa2c3d7093d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 10
-  rotateSpeed: 90
-  bulletOwner: {fileID: 0}
-  m_spriteRenderer: {fileID: 5357397972880385029}
-  trailGameObject: {fileID: 7631303287652413178}
+  m_BulletSpeed: 10
+  m_BulletOwner: {fileID: 0}
+  m_SpriteRenderer: {fileID: 5357397972880385029}
+  m_TrailGameObjectParticleSystem: {fileID: 7631303287652413178}
 --- !u!61 &2722268936547424115
 BoxCollider2D:
   m_ObjectHideFlags: 0

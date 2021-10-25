@@ -270,7 +270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 337772052164782588, guid: 848d937d437c418459bd4cefc16b8295, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.39
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 337772052164782588, guid: 848d937d437c418459bd4cefc16b8295, type: 3}
       propertyPath: m_LocalPosition.y
@@ -324,6 +324,10 @@ PrefabInstance:
     - target: {fileID: 6964709337135481920, guid: e808115f2421d5e4dbdec0f50e0dabbe, type: 3}
       propertyPath: m_Name
       value: SpaceShooterGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964709337135481934, guid: e808115f2421d5e4dbdec0f50e0dabbe, type: 3}
+      propertyPath: m_GameTimer.m_InternalValue
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6964709337135481935, guid: e808115f2421d5e4dbdec0f50e0dabbe, type: 3}
       propertyPath: m_RootOrder
