@@ -3,17 +3,17 @@ using Unity.Netcode;
 
 public class ShipBattleSessionInfo : MonoBehaviour
 {
-    private NetworkManager m_networkManager;
+    private NetworkManager m_NetworkManager;
 
     private void Start()
     {
-        m_networkManager = NetworkManager.Singleton;
+        m_NetworkManager = NetworkManager.Singleton;
     }
 
     void OnGUI()
     {
         GUILayout.BeginArea(new Rect(10, 10, 300, 300));
-        if (m_networkManager.IsClient || m_networkManager.IsServer)
+        if (m_NetworkManager.IsClient || m_NetworkManager.IsServer)
         {
             StatusLabels();
         }
@@ -23,12 +23,12 @@ public class ShipBattleSessionInfo : MonoBehaviour
 
     void StatusLabels()
     {
-        var mode = m_networkManager.IsHost ?
-            "Host" : m_networkManager.IsServer ? "Server" : "Client";
+        var connectionMode = m_NetworkManager.IsHost ?
+            "Host" : m_NetworkManager.IsServer ? "Server" : "Client";
 
         GUILayout.Label("Transport: " +
-            m_networkManager.NetworkConfig.NetworkTransport.GetType().Name);
+            m_NetworkManager.NetworkConfig.NetworkTransport.GetType().Name);
 
-        GUILayout.Label("Mode: " + mode);
+        GUILayout.Label("Mode: " + connectionMode);
     }
 }

@@ -3,11 +3,9 @@ using Unity.Netcode;
 
 public class BasicEnemyBehavior : NetworkBehaviour
 {
-    public float enemySpeed = 7f;
+    public float m_EnemySpeed = 7f;
 
-    public float rotateSpeed = 19f;
-
-    private NetworkVariable<float> enemyLifetime =
+    private NetworkVariable<float> m_EnemyLifetime =
         new NetworkVariable<float>(NetworkVariableReadPermission.Everyone, 10f);
 
     public override void OnNetworkSpawn()
@@ -20,13 +18,13 @@ public class BasicEnemyBehavior : NetworkBehaviour
     {
         if (IsOwner)
         {
-            transform.Translate(Vector2.left * enemySpeed * Time.deltaTime);
+            transform.Translate(Vector2.left * m_EnemySpeed * Time.deltaTime);
         }
 
         if (IsServer)
         {
-            enemyLifetime.Value -= Time.deltaTime;
-            if (enemyLifetime.Value <= 0f)
+            m_EnemyLifetime.Value -= Time.deltaTime;
+            if (m_EnemyLifetime.Value <= 0f)
             {
                 DespawnEnemy();
             }
@@ -39,14 +37,17 @@ public class BasicEnemyBehavior : NetworkBehaviour
         if (!IsServer)
             return;
 
+        // check if it's collided with a player spaceship
         var spacheshipController = other.gameObject.GetComponent<SpaceshipController>();
         if (spacheshipController != null)
         {
             DespawnEnemy();
 
+            // tell the spaceship that it's taken damage
             spacheshipController.TakeDamage();
         }
 
+        // check if it's collided with a player's bullet
         var shipBulletBehavior = other.gameObject.GetComponent<ShipBulletBehavior>();
         if (shipBulletBehavior != null)
         {

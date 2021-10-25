@@ -5,14 +5,16 @@ using System;
 public class SpaceshipController : NetworkBehaviour
 {
     [SerializeField]
-    private Color[] PlayerColors;
+    private Color[] m_PlayerColors;
 
     [SerializeField]
-    private GameObject m_gameObjectHealthBar;
+    private GameObject m_GameObjectHealthBar;
 
-    private NetworkVariable<int> m_shipHealth = new NetworkVariable<int>(NetworkVariableReadPermission.Everyone, 5);
+    private NetworkVariable<int> m_ShipHealth = new NetworkVariable<int>(NetworkVariableReadPermission.Everyone, 5);
 
-    private NetworkVariable<byte> m_shipColorId = new NetworkVariable<byte>(NetworkVariableReadPermission.OwnerOnly, 0);
+    private NetworkVariable<byte> m_ShipColorId = new NetworkVariable<byte>(NetworkVariableReadPermission.OwnerOnly, 0);
+
+    private NetworkVariable<byte> m_ShipScore = new NetworkVariable<byte>(NetworkVariableReadPermission.Everyone, 0);
 
     [SerializeField]
     private float m_MovementSpeed;
@@ -23,7 +25,7 @@ public class SpaceshipController : NetworkBehaviour
     [SerializeField]
     private SpriteRenderer m_SpriteRenderer;
 
-    private Vector2 m_direction = new Vector2();
+    private Vector2 m_Direction = new Vector2();
 
     private void Start()
     {
@@ -41,13 +43,13 @@ public class SpaceshipController : NetworkBehaviour
     private void OnEnable()
     {
         // Start listening for the team index being updated
-        m_shipColorId.OnValueChanged += OnTeamChanged;
+        m_ShipColorId.OnValueChanged += OnTeamChanged;
     }
 
     private void OnDisable()
     {
         // Stop listening for the team index being updated
-        m_shipColorId.OnValueChanged -= OnTeamChanged;
+        m_ShipColorId.OnValueChanged -= OnTeamChanged;
     }
 
     private void OnTeamChanged(byte oldTeamIndex, byte newTeamIndex)
@@ -55,19 +57,22 @@ public class SpaceshipController : NetworkBehaviour
         try
         {
             // Only clients need to update the renderer
-            if (!IsClient) { return; }
+            if (!IsClient)
+            { 
+                return;
+            }
 
-            if(PlayerColors != null && m_SpriteRenderer != null)
+            if(m_PlayerColors != null && m_SpriteRenderer != null)
             {
                 GameLogFile.WriteToLog(OwnerClientId, $"Ship color ID: {newTeamIndex}, Ship color: { m_SpriteRenderer.color}\n");
 
                 // Update the color of the player's mesh renderer
-                m_SpriteRenderer.color = PlayerColors[newTeamIndex];
+                m_SpriteRenderer.color = m_PlayerColors[newTeamIndex];
             }
             else
             {
                 Debug.Log("something is null!");
-                GameLogFile.WriteToLog(OwnerClientId, $"THIS IS NULL! PlayerColors:{PlayerColors == null}, m_SpriteRenderer:{m_SpriteRenderer == null} newTeamIndex:{newTeamIndex} oldTeamIndex:{oldTeamIndex}");
+                GameLogFile.WriteToLog(OwnerClientId, $"THIS IS NULL! PlayerColors:{m_PlayerColors == null}, m_SpriteRenderer:{m_SpriteRenderer == null} newTeamIndex:{newTeamIndex} oldTeamIndex:{oldTeamIndex}");
             }
         }
         catch(NullReferenceException nEx)
@@ -105,28 +110,28 @@ public class SpaceshipController : NetworkBehaviour
             return;
         }
 
-        m_direction = Vector2.zero;
+        m_Direction = Vector2.zero;
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            m_direction.x -= 1f;
+            m_Direction.x -= 1f;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            m_direction.x += 1f;
+            m_Direction.x += 1f;
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            m_direction.y -= 1f;
+            m_Direction.y -= 1f;
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            m_direction.y += 1f;
+            m_Direction.y += 1f;
         }
-        m_direction.Normalize();
+        m_Direction.Normalize();
 
         // client lets the server know that it has moved it's player
-        MoveSpaceShipServerRpc(m_direction);
+        MoveSpaceShipServerRpc(m_Direction);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -135,19 +140,19 @@ public class SpaceshipController : NetworkBehaviour
         }
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     private void MoveSpaceShipServerRpc(Vector2 direction)
     {
         transform.Translate(direction * m_MovementSpeed * Time.deltaTime);
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     private void UpdateColorServerRpc()
     {
-        m_shipColorId.Value = (byte)(UnityEngine.Random.Range(0, PlayerColors.Length - 1));
+        m_ShipColorId.Value = (byte)(UnityEngine.Random.Range(0, m_PlayerColors.Length - 1));
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     private void ShootBulletServerRPC()
     {
         if (m_BulletPrefab == null)
@@ -161,9 +166,9 @@ public class SpaceshipController : NetworkBehaviour
         newBulletNetworkObject.Spawn();
 
         var shipBulletBehavior = newBullet.GetComponent<ShipBulletBehavior>();
-        shipBulletBehavior.bulletOwner = gameObject;
+        shipBulletBehavior.m_BulletOwner = gameObject;
 
-        shipBulletBehavior.SetTrailColorClientRpc(PlayerColors[m_shipColorId.Value]);
+        shipBulletBehavior.SetTrailColorClientRpc(m_PlayerColors[m_ShipColorId.Value]);
 
         newBulletNetworkObject.gameObject.GetComponent<ShipBulletBehavior>().PlayParticlesClientRpc();
     }
@@ -181,17 +186,25 @@ public class SpaceshipController : NetworkBehaviour
     {
         if (IsServer)
         {
-            m_shipHealth.Value -= 1;
+            m_ShipHealth.Value -= 1;
 
-            var scale = m_gameObjectHealthBar.transform.localScale;
-            scale.x = m_shipHealth.Value / 5f;
-            m_gameObjectHealthBar.transform.localScale = scale;
+            var scale = m_GameObjectHealthBar.transform.localScale;
+            scale.x = m_ShipHealth.Value / 5f;
+            m_GameObjectHealthBar.transform.localScale = scale;
 
-            if (m_shipHealth.Value <= 0)
+            if (m_ShipHealth.Value <= 0)
             {
                 // update the client, tell it that it's spaceship is defeated
                 ShipIsDeadClientRPC();
             }
+        }
+    }
+
+    public void IncreaseScore()
+    {
+        if (IsServer)
+        {
+            m_ShipScore.Value += 1;
         }
     }
 }

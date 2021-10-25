@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 public class MainMenuControl : MonoBehaviour
 {
     [SerializeField]
-    private string SceneToSwitchTo = string.Empty;
+    private string m_NextSceneToSwitchTo = string.Empty;
 
     // Start is called before the first frame update
     void Start()
@@ -41,18 +41,18 @@ public class MainMenuControl : MonoBehaviour
     private void HostButton_clicked()
     {
         NetworkManager.Singleton.StartHost();
-        SceneTransitionHandler.sceneTransitionHandler.SwitchScene(SceneToSwitchTo);
+        SceneTransitionHandler.sceneTransitionHandler.SwitchScene(m_NextSceneToSwitchTo);
     }
 
     private void ClientButton_clicked()
     {
         NetworkManager.Singleton.StartClient();
-        SceneTransitionHandler.sceneTransitionHandler.SwitchScene(SceneToSwitchTo);
+        SceneTransitionHandler.sceneTransitionHandler.SwitchScene(m_NextSceneToSwitchTo);
     }
 
     private void ServerButton_clicked()
     {
         NetworkManager.Singleton.StartServer();
-        SceneTransitionHandler.sceneTransitionHandler.SwitchScene(SceneToSwitchTo);
+        SceneTransitionHandler.sceneTransitionHandler.SwitchScene(m_NextSceneToSwitchTo);
     }
 }

@@ -5,21 +5,21 @@ using UnityEngine.UIElements;
 public class SpaceshipShooterGame : NetworkBehaviour
 {
     [SerializeField]
-    private string EndScene = "EndScene";
+    private string m_EndSceneName = "EndScene";
 
     [SerializeField]
-    private NetworkVariable<float> gameTimer = new NetworkVariable<float>(NetworkVariableReadPermission.Everyone, 25f);
+    private NetworkVariable<float> m_GameTimer = new NetworkVariable<float>(NetworkVariableReadPermission.Everyone, 25f);
 
-    private UIDocument gameScreenUIdocument;
+    private UIDocument m_GameScreenUIdocument;
 
-    private Label gameScreenLabel;
+    private Label m_GameScreenLabel;
 
     // Start is called before the first frame update
     void Start()
     {
-        if(gameObject.TryGetComponent<UIDocument>(out gameScreenUIdocument))
+        if(gameObject.TryGetComponent(out m_GameScreenUIdocument))
         {
-            gameScreenLabel = gameScreenUIdocument.rootVisualElement.Q<Label>("GameTimerLabel");
+            m_GameScreenLabel = m_GameScreenUIdocument.rootVisualElement.Q<Label>("GameTimerLabel");
         }
     }
 
@@ -29,9 +29,9 @@ public class SpaceshipShooterGame : NetworkBehaviour
         if (!IsServer)
             return;
 
-        var currentTime = gameTimer.Value;
+        var currentTime = m_GameTimer.Value;
         currentTime -= Time.deltaTime;
-        gameTimer.Value = currentTime;
+        m_GameTimer.Value = currentTime;
 
         UpdateTimerLabelTextClientRPC(Mathf.RoundToInt(currentTime));
 
@@ -44,12 +44,12 @@ public class SpaceshipShooterGame : NetworkBehaviour
     void ChangeToEndSceneClientRpc()
     {
         //Game over!
-        SceneTransitionHandler.sceneTransitionHandler.SwitchScene(EndScene);
+        SceneTransitionHandler.sceneTransitionHandler.SwitchScene(m_EndSceneName);
     }
 
     [ClientRpc]
     void UpdateTimerLabelTextClientRPC(int currentTime)
     {
-        gameScreenLabel.text = $"Game Time: {currentTime} s";
+        m_GameScreenLabel.text = $"Game Time: {currentTime} s";
     }
 }

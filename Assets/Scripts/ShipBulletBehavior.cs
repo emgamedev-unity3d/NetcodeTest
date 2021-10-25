@@ -3,19 +3,17 @@ using Unity.Netcode;
 
 public class ShipBulletBehavior : NetworkBehaviour
 {
-    public float bulletSpeed = 10f;
+    public float m_BulletSpeed = 10f;
 
-    public float rotateSpeed = 90f;
-
-    public GameObject bulletOwner = null;
+    public GameObject m_BulletOwner = null;
 
     [SerializeField]
-    private SpriteRenderer m_spriteRenderer;
+    private SpriteRenderer m_SpriteRenderer;
 
     [SerializeField]
-    private ParticleSystem trailGameObject = null;
+    private ParticleSystem m_TrailGameObjectParticleSystem = null;
 
-    private NetworkVariable<float> bulletLifetime = 
+    private NetworkVariable<float> m_BulletLifetime = 
         new NetworkVariable<float>(NetworkVariableReadPermission.Everyone, 10f);
 
     public override void OnNetworkSpawn()
@@ -28,18 +26,13 @@ public class ShipBulletBehavior : NetworkBehaviour
     {
         if (IsOwner)
         {
-            transform.Translate(Vector2.right * bulletSpeed * Time.deltaTime);
-
-            //float rotation = transform.rotation.eulerAngles.z;
-            //rotation += rotateSpeed * Time.deltaTime;
-
-            //transform.localRotation = Quaternion.Euler(0f, 0f, rotation);
+            transform.Translate(Vector2.right * m_BulletSpeed * Time.deltaTime);
         }
 
         if (IsServer)
         {
-            bulletLifetime.Value -= Time.deltaTime;
-            if (bulletLifetime.Value <= 0f)
+            m_BulletLifetime.Value -= Time.deltaTime;
+            if (m_BulletLifetime.Value <= 0f)
             {
                 DespawnBullet();
             }
@@ -50,9 +43,9 @@ public class ShipBulletBehavior : NetworkBehaviour
     public void SetTrailColorClientRpc(Color color)
     {
         // need to make sure that we're updating the right player
-        if (trailGameObject != null)
+        if (m_TrailGameObjectParticleSystem != null)
         {
-            var main = trailGameObject.main;
+            var main = m_TrailGameObjectParticleSystem.main;
             main.startColor = new ParticleSystem.MinMaxGradient(color);
         }
         else
@@ -64,9 +57,9 @@ public class ShipBulletBehavior : NetworkBehaviour
     [ClientRpc]
     public void PlayParticlesClientRpc()
     {
-        if (trailGameObject != null)
+        if (m_TrailGameObjectParticleSystem != null)
         {
-            trailGameObject.Play();
+            m_TrailGameObjectParticleSystem.Play();
         }
     }
 
@@ -76,9 +69,15 @@ public class ShipBulletBehavior : NetworkBehaviour
         if (!IsServer)
             return;
 
+        // check if the bullet has collided with an enemy
         var basicEnemy = other.gameObject.GetComponent<BasicEnemyBehavior>();
         if(basicEnemy != null)
         {
+            var spaceshipController = m_BulletOwner.GetComponent<SpaceshipController>();
+            if(spaceshipController != null)
+            {
+            }
+
             DespawnBullet();
         }
     }

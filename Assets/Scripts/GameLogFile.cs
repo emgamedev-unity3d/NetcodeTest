@@ -2,8 +2,8 @@ using System.IO;
 
 public static class GameLogFile
 {
-    static string directory = Directory.GetCurrentDirectory();
-    static string logName = "gameLog";
+    static string s_Directory = Directory.GetCurrentDirectory();
+    static string s_LogName = "gameLog";
     static public void WriteToLog(ulong clientID, string input)
     {
         var path = GetPath(clientID);
@@ -27,6 +27,6 @@ public static class GameLogFile
 
     static string GetPath(ulong clientID)
     {
-        return Path.Combine(directory, $"{logName}_{clientID}.txt");
+        return Path.Combine(s_Directory, $"{s_LogName}_{clientID}.txt");
     }
 }
