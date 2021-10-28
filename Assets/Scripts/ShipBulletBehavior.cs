@@ -24,13 +24,10 @@ public class ShipBulletBehavior : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsOwner)
-        {
-            transform.Translate(Vector2.right * m_BulletSpeed * Time.deltaTime);
-        }
-
         if (IsServer)
         {
+            transform.Translate(Vector2.right * m_BulletSpeed * Time.deltaTime);
+
             m_BulletLifetime.Value -= Time.deltaTime;
             if (m_BulletLifetime.Value <= 0f)
             {
